@@ -47,12 +47,12 @@ describe('integration', () => {
   it('should write to tsconfig project config file', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'libs',
       fileName: 'tsconfig',
       keyPath: 'compilerOptions.paths',
       name: 'project1'
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('libs/project1/project.config.json') as any) as ProjectConfigFile;
 
@@ -63,12 +63,12 @@ describe('integration', () => {
   it('should write to nx project config file', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'apps',
       fileName: 'nx',
       keyPath: 'projects',
       name: 'project2'
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('apps/project2/project.config.json') as any) as ProjectConfigFile;
 
@@ -78,11 +78,11 @@ describe('integration', () => {
   it('should write to angular project config file', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'apps',
       fileName: 'angular',
       name: 'project2'
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('apps/project2/project.config.json') as any) as ProjectConfigFile;
 
@@ -109,12 +109,12 @@ describe('integration', () => {
       }
     }));
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'apps',
       fileName: 'angular',
       keyPath: 'projects',
       name: 'project2'
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('apps/project2/project.config.json') as any) as ProjectConfigFile;
 
@@ -127,12 +127,12 @@ describe('integration', () => {
   it('should write to workspace project config file', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'apps',
       fileName: 'workspace',
       name: 'project2',
       keyPath: 'projects',
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('apps/project2/project.config.json') as any) as ProjectConfigFile;
 
@@ -159,12 +159,12 @@ describe('integration', () => {
       }
     }));
 
-    const tree = runner.runSchematic('writer', {
+    const tree = await runner.runSchematicAsync('writer', {
       rootDirectory: 'apps',
       fileName: 'workspace',
       keyPath: 'projects',
       name: 'project2'
-    }, testTree);
+    }, testTree).toPromise();
 
     const data = JSON.parse(tree.read('apps/project2/project.config.json') as any) as ProjectConfigFile;
 
