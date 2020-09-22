@@ -1,16 +1,19 @@
 sudo: false
 language: node_js
 node_js:
-  - "12"
-branches:
-  only:
-    - master
+  - node
+  - lts/*
+  - 10
+# branches:
+#   only:
+#     - master
 cache:
+  yarn: true
   directories:
     - node_modules
 before_install:
-  - npm update
+  - yarn update
 install:
-  - npm install
+  - yarn install
 script:
-  - npm run coveralls
+  - yarn coveralls
